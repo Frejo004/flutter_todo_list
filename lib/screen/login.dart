@@ -65,20 +65,11 @@ class LoginPage extends StatelessWidget {
                   prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
+                    
                   ),
                 ),
               ),
               const SizedBox(height: 10),
-
-              // Lien "Forgot password?"
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text("Forgot password?"),
-                ),
-              ),
-              const SizedBox(height: 20),
 
               // Bouton Login
               SizedBox(
@@ -105,18 +96,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Bouton "Create an account"
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account?"),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("Sign up"),
-                  ),
-                ],
-              ),
             ],
           ),
         ),
