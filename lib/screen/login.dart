@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_list/screen/home.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
-    );
-  }
-}
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -43,7 +27,7 @@ class LoginPage extends StatelessWidget {
                 "Connexion",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 60),
               
               // Champ Username
               TextField(
@@ -78,9 +62,8 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Redirection vers la HomePage
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                     Navigator.pushNamed(
+                      context, '/'
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -96,6 +79,22 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+
+                // Bouton "Create an account"
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Vous n'aviez pas de compte ! 😔"),
+                    TextButton(
+                      onPressed: () {
+                         Navigator.pushNamed(
+                      context, '/register'
+                    );
+                      },
+                      child: const Text("S'incrire 😎"),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
