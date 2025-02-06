@@ -1,8 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_list/screen/home.dart';
-import 'package:flutter_todo_list/screen/login.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
