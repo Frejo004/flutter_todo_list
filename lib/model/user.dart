@@ -7,3 +7,8 @@ class User {
     required this.password,
   });
 }
+
+final List<User> users = [
+  User(username: 'user1', password: 'password1'),
+  User(username: 'user2', password: 'password2'),
+];
