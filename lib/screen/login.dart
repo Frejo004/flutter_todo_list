@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Welcome Back!",
+                "Bienvenu à votre ToDo List",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                "Login to your account",
+                "Connexion",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
