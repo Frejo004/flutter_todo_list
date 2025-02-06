@@ -9,18 +9,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Roboto",
       ),
-
-      home:Scaffold(
+      home: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 254, 255),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 151, 202, 153),
           title: Center(child: Text("To Do List")),
         ),
-
-        drawer: Drawer(),
-
         body: HomePage(),
-      ) ,
+      ),
     );
   }
 }
@@ -71,13 +67,52 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Icon(Icons.menu, color: Colors.black),
         actions: [
           CircleAvatar(
             backgroundImage: AssetImage("assets/profile.png"),
           ),
           SizedBox(width: 16),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.logout_outlined),
+              title: Text('Deconnexion'),
+              onTap: () {
+                 Navigator.pushNamed(
+                      context, '/'
+                    );
+              },
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -105,8 +140,6 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-
-          
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
@@ -152,7 +185,6 @@ class InputAjouterTache extends StatelessWidget {
     );
   }
 }
-
 
 class Recherche extends StatelessWidget {
   const Recherche({super.key});
