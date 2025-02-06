@@ -37,12 +37,14 @@ class _LoginPageState extends State<LoginPage> {
               ));
 
       if (user.username.isEmpty) {
+        print("username");
         setState(() {
           _errorMessage =
               'Nom d\'utilisateur ou le mot de passe est incorrect .';
+            
         });
       } else {
-        Navigator.pushNamed(context, 'home');
+        Navigator.pushNamed(context, '/home');
       }
     }
   }
@@ -109,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                         return 'Veuillez entrer votre mot de passe';
                       }
                       if (value.length < 6) {
+                        print("password");
                         return 'Le mot de passe doit contenir au moins 6 caractères';
                       }
                       return null;
@@ -122,8 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Redirection vers la HomePage
-                      Navigator.pushNamed(context, '/');
+                      _login();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
