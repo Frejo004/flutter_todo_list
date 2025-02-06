@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_list/model/user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,21 +13,42 @@ class _LoginPageState extends State<LoginPage> {
   //créer des controller
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String _errorMessage = '';
 
   @override
-    void dispose() {
-      _nameController.dispose();
-      _passwordController.dispose();
-      super.dispose();
-    }
-    
-    void _submitForm() {
-      String name = _nameController.text; //Récupérer le nom 
-      String password = _passwordController.text; //Récupérer le mot de passe
-    }
+  void dispose() {
+    _nameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
-    @override
-    Widget build(BuildContext context) {
+  void _login() {
+    //validation du formulaire
+    if (_formKey.currentState!.validate()) {
+      String username = _nameController.text; //Récupérer le nom
+      String password = _passwordController.text; //Récupérer le mot de passe
+
+      //vérifier les informations de l'indentification
+      final user = users.firstWhere(
+          (user) => user.username == username && user.password == password,
+          orElse: () => User(
+                username: '',
+                password: '',
+              ));
+
+      if (user.username.isEmpty) {
+        setState(() {
+          _errorMessage =
+              'Nom d\'utilisateur ou le mot de passe est incorrect .';
+        });
+      } else {
+        Navigator.pushNamed(context, 'home');
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: Center(
@@ -53,8 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 60),
 
                 // Champ Username
-                TextField(
-                  controller : _nameController,
+                TextFormField(
+                  controller: _nameController,
                   decoration: InputDecoration(
                     labelText: "Username",
                     prefixIcon: const Icon(Icons.person, color: Colors.grey),
@@ -62,11 +84,17 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez entrer votre nom d\'utilisateur';
+                      }
+                      return null;
+                    },
                 ),
                 const SizedBox(height: 20),
 
                 // Champ Password
-                TextField(
+                TextFormField(
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -76,6 +104,15 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez entrer votre mot de passe';
+                      }
+                      if (value.length < 6) {
+                        return 'Le mot de passe doit contenir au moins 6 caractères';
+                      }
+                      return null;
+                    },
                 ),
                 const SizedBox(height: 10),
 
@@ -101,6 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Affichage des erreurs
+                if (_errorMessage.isNotEmpty)
+                  Text(
+                    _errorMessage,
+                    style: TextStyle(color: Colors.red),
+                  ),
 
                 // Bouton "Create an account"
                 Row(
