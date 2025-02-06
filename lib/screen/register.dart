@@ -73,11 +73,11 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 10),
 
-              // Champ PasswordComfirme
+              // Champ PasswordConfirm
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  labelText: "Password  Confirm",
                   prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -94,7 +94,7 @@ class _RegisterState extends State<Register> {
                   onPressed: () {
                     // Redirection vers la HomePage
                      Navigator.pushNamed(
-                      context, '/'
+                      context, '/home'
                     );
                   },
                   style: ElevatedButton.styleFrom(
