@@ -1,84 +1,106 @@
 import 'package:flutter/material.dart';
 
-
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  //créer des controller
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+    void dispose() {
+      _nameController.dispose();
+      _passwordController.dispose();
+      super.dispose();
+    }
+    
+    void _submitForm() {
+      String name = _nameController.text; //Récupérer le nom 
+      String password = _passwordController.text; //Récupérer le mot de passe
+    }
+
+    @override
+    Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Bienvenu à votre ToDo List",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Connexion",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              const SizedBox(height: 60),
-              
-              // Champ Username
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Username",
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Bienvenu à votre ToDo List",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              
-              // Champ Password
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    
-                  ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Connexion",
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
-              ),
-              const SizedBox(height: 10),
+                const SizedBox(height: 60),
 
-              // Bouton Login
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Redirection vers la HomePage
-                     Navigator.pushNamed(
-                      context, '/'
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    shape: RoundedRectangleBorder(
+                // Champ Username
+                TextField(
+                  controller : _nameController,
+                  decoration: InputDecoration(
+                    labelText: "Username",
+                    prefixIcon: const Icon(Icons.person, color: Colors.grey),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+
+                // Champ Password
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                    prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
+                const SizedBox(height: 10),
+
+                // Bouton Login
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Redirection vers la HomePage
+                      Navigator.pushNamed(context, '/');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
 
                 // Bouton "Create an account"
                 Row(
@@ -87,15 +109,14 @@ class LoginPage extends StatelessWidget {
                     const Text("Vous n'aviez pas de compte ! 😔"),
                     TextButton(
                       onPressed: () {
-                         Navigator.pushNamed(
-                      context, '/register'
-                    );
+                        Navigator.pushNamed(context, '/register');
                       },
                       child: const Text("S'incrire 😎"),
                     ),
                   ],
                 ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
