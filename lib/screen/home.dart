@@ -1,5 +1,29 @@
 import 'package:flutter/material.dart';
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "Roboto",
+      ),
+
+      home:Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 254, 255),
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 151, 202, 153),
+          title: Center(child: Text("To Do List")),
+        ),
+
+        drawer: Drawer(),
+
+        body: HomePage(),
+      ) ,
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         leading: Icon(Icons.menu, color: Colors.black),
         actions: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/profile.jpg"),
+            backgroundImage: AssetImage("assets/profile.png"),
           ),
           SizedBox(width: 16),
         ],
