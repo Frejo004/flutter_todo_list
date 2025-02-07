@@ -106,9 +106,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.logout_outlined),
               title: Text('Deconnexion'),
               onTap: () {
-                 Navigator.pushNamed(
-                      context, '/'
-                    );
+                Navigator.pushNamed(context, '/');
               },
             ),
           ],
