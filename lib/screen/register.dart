@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_list/screen/home.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -19,10 +20,12 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Bienvenu à votre ToDo List",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,),
+              Text(
+                "Bienvenu à votre ToDo List",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 14),
 
@@ -32,7 +35,7 @@ class _RegisterState extends State<Register> {
               ),
 
               const SizedBox(height: 60),
-              
+
               // Champ Username
               TextField(
                 decoration: InputDecoration(
@@ -44,20 +47,19 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               const SizedBox(height: 20),
-              
-              
+
               // Champ Email
               TextField(
                 decoration: InputDecoration(
                   labelText: "Username",
-                  prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
+                  prefixIcon:
+                      const Icon(Icons.email_outlined, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              
 
               // Champ Password
               TextField(
@@ -67,7 +69,6 @@ class _RegisterState extends State<Register> {
                   prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    
                   ),
                 ),
               ),
@@ -81,7 +82,6 @@ class _RegisterState extends State<Register> {
                   prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    
                   ),
                 ),
               ),
@@ -93,9 +93,7 @@ class _RegisterState extends State<Register> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Redirection vers la HomePage
-                     Navigator.pushNamed(
-                      context, '/home'
-                    );
+                    Navigator.pushNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
@@ -110,26 +108,25 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               const SizedBox(height: 20),
-              
-                // Bouton "Login"
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Aviez-vous déjà un compte?"),
-                    TextButton(
-                      onPressed: () {
-                          Navigator.pushNamed(
-                      context, '/'
-                    );
-                      },
-                      child: const Text("Se connecter 🤩"),
-                    ),
-                  ],
-                ),
+
+              // Bouton "Login"
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Aviez-vous déjà un compte?"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                    child: const Text("Se connecter 🤩"),
+                  ),
+                ],
+              ),
             ],
-          ),),
+          ),
+        ),
       ),
     );
   }
 }
-
