@@ -1,39 +1,24 @@
 import 'dart:math' as math;
-
 import 'package:flutter/widgets.dart';
 
 class CardFlipEffect extends StatefulWidget {
   final Widget child;
   final Duration duration;
+  final AnimationController controller; // Ajoutez un AnimationController
 
   const CardFlipEffect({
     super.key,
     required this.child,
     required this.duration,
+    required this.controller, // Requiert un AnimationController
   });
 
   @override
   State<CardFlipEffect> createState() => _CardFlipEffectState();
 }
 
-class _CardFlipEffectState extends State<CardFlipEffect>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
+class _CardFlipEffectState extends State<CardFlipEffect> {
   Widget? _previousChild;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController =
-        AnimationController(vsync: this, duration: widget.duration);
-
-    _animationController.addListener(() {
-      if (_animationController.value == 1) {
-        _animationController.reset();
-      }
-    });
-  }
 
   @override
   void didUpdateWidget(covariant CardFlipEffect oldWidget) {
@@ -46,20 +31,20 @@ class _CardFlipEffectState extends State<CardFlipEffect>
 
   void _handleChildChanged(Widget newChild, Widget previousChild) {
     _previousChild = previousChild;
-    _animationController.forward();
+    widget.controller.forward(); // Utilisez le contrôleur externe
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animationController,
+      animation: widget.controller, // Utilisez le contrôleur externe
       builder: (context, child) {
         return Transform(
           alignment: Alignment.center,
           transform: Matrix4.identity()
-            ..rotateX(_animationController.value * math.pi),
-          child: _animationController.isAnimating
-              ? _animationController.value < 0.5
+            ..rotateX(widget.controller.value * math.pi),
+          child: widget.controller.isAnimating
+              ? widget.controller.value < 0.5
                   ? _previousChild
                   : Transform.flip(flipY: true, child: child)
               : child,
