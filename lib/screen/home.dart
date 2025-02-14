@@ -10,6 +10,46 @@ class MyApp extends StatelessWidget {
         fontFamily: "Roboto",
       ),
       home: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+                child: Text(
+                  'Menu',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Home'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.games_outlined),
+                title: Text('Games'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/joket');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.logout_outlined),
+                title: Text('Deconnexion'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/');
+                },
+              ),
+            ],
+          ),
+        ),
         backgroundColor: const Color.fromARGB(255, 255, 254, 255),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 151, 202, 153),
