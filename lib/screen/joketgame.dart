@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,8 +32,16 @@ class _JoketGameState extends State<JoketGame> {
     return FutureBuilder(
         future: getJoket(),
         builder: (context, snapshot) {
-          print(snapshot);
-
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          if (snapshot.hasData) {
+            print(snapshot.data);
+          }
+          else{
+            return Text ("Donnée non troouvées");
+          }
+          
           return Text("Like a joke !");
         });
   }
