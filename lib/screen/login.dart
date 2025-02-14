@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_list/animations/flip_effect.dart'; 
+import 'package:flutter_todo_list/animations/flip_effect.dart';
 import 'package:flutter_todo_list/model/user.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,7 +9,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -48,13 +49,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
       if (user.username.isEmpty) {
         setState(() {
-          _errorMessage = 'Nom d\'utilisateur ou le mot de passe est incorrect.';
+          _errorMessage =
+              'Nom d\'utilisateur ou le mot de passe est incorrect.';
         });
       } else {
         // Déclenchez l'animation avant la navigation
-        _animationController.forward().then((_) {
-          Navigator.pushNamed(context, '/home');
-        });
+        Navigator.pushNamed(
+            context, '/home' );
       }
     }
   }
@@ -130,8 +131,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                 // Bouton Login avec animation de flip
                 CardFlipEffect(
-                  controller: _animationController, 
-                  duration: Duration(milliseconds: 1000), 
+                  controller: _animationController,
+                  duration: Duration(milliseconds: 1000),
                   child: SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -168,9 +169,11 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                     const Text("Vous n'aviez pas de compte ! 😔"),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/register');
+                        Navigator.pushNamed(
+                          context, '/register'
+                        );
                       },
-                      child: const Text("S'incrire 😎"),
+                      child: const Text("Créer un compte"),
                     ),
                   ],
                 ),
