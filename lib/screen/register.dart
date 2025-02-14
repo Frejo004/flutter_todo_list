@@ -116,8 +116,7 @@ class _RegisterState extends State<Register> {
                   const Text("Aviez-vous déjà un compte?"),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Navigator.pushNamed(context, '/');
                     },
                     child: const Text("Se connecter 🤩"),
                   ),
