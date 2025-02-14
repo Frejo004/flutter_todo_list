@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:http/http.dart' as http;
 
 class JoketGame extends StatefulWidget {
@@ -36,13 +37,49 @@ class _JoketGameState extends State<JoketGame> {
             return CircularProgressIndicator();
           }
           if (snapshot.hasData) {
+            final joke = snapshot.data;
+            final setup = joke!['setup'];
+            final punchline = joke['punchline'];
             print(snapshot.data);
+
+            return Column(
+              children: [
+                FlipCard(
+                  controller: FlipCardController(),
+                  rotateSide: RotateSide.left,
+                  frontWidget: Card(
+                      color: Colors.amberAccent,
+                      child: Column(
+                        children: [
+                          Text('$setup'),
+                          SizedBox(height: 10),
+                          Text('Joket !')
+                        ],
+                      )),
+                  backWidget: Card(
+                      color: Colors.red,
+                      child: Column(
+                        children: [
+                          Text('$punchline'),
+                          SizedBox(height: 20),
+                          Text('Punchline !')
+                        ],
+                      )),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      getJoket();
+                    });
+                  },
+                  child: Text('Get New Joke'),
+                ),
+              ],
+            );
+          } else {
+            return Text("Donnée non troouvées");
           }
-          else{
-            return Text ("Donnée non troouvées");
-          }
-          
-          return Text("Like a joke !");
         });
   }
 }
